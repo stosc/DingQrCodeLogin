@@ -24,6 +24,8 @@ namespace DingQrCodeLogin.Controllers
 
         public IActionResult Index()
         {
+            string qrAppId = AppConfigurtaionHelper.Configuration["DingDing:QrAppId"];
+            ViewBag.AppId = qrAppId;
             return View();
         }
 
@@ -45,12 +47,16 @@ namespace DingQrCodeLogin.Controllers
                 DefaultDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/sns/getuserinfo_bycode");
                 OapiSnsGetuserinfoBycodeRequest req = new OapiSnsGetuserinfoBycodeRequest();
                 req.TmpAuthCode = code;
-                response = client.Execute(req, qrAppId, qrAppSecret); 
-
+                response = client.Execute(req, qrAppId, qrAppSecret);
+                var name = response.UserInfo.Nick;
+                var openId = response.UserInfo.Openid;
+                var unionid = response.UserInfo.Unionid;
                 //获取到response后就可以进行自己的登录业务处理了
 
                 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 //此处省略一万行代码
+
+                //TODO: 此处处理登录逻辑，先判断openid，和姓名在数据库中的匹配，成功后等同于用户名密码登录成功；同时要记录登录成功的ip地址
 
 
             }

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dingqrcodelogin:
+    image: ${DOCKER_REGISTRY-}dingqrcodelogin
+    build:
+      context: .
+      dockerfile: DingQrCodeLogin/Dockerfile
