@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /src
 COPY DingQrCodeLogin/DingQrCodeLogin.csproj DingQrCodeLogin/
 COPY DingQrCodeLogin/nuget.config DingQrCodeLogin/
-RUN dotnet restore "DingQrCodeLogin/DingQrCodeLogin.csproj" -s https://nuget.cdn.azure.cn/v3/index.json
+RUN dotnet restore "DingQrCodeLogin/DingQrCodeLogin.csproj" --source https://nuget.cdn.azure.cn/v3/index.json
 COPY . .
 WORKDIR "/src/DingQrCodeLogin"
 RUN dotnet build "DingQrCodeLogin.csproj" -c Release -o /app/build
